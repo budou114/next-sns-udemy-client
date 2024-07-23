@@ -1,16 +1,31 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+import apiClient from '@/lib/apiClient';
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 
-const signup = () => {
+const Signup = () => {
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const router = useRouter();
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         // 新規登録を行うAPIを叩く
+        try {
+            await apiClient.post("/auth/register", {
+                name,
+                email,
+                password
+            });
+
+            router.push("/login");
+        } catch (error) {
+            console.dir(error);
+            alert("入力内容が正しくありません。")
+        }
     }
 
     return (
@@ -101,4 +116,4 @@ const signup = () => {
     )
 }
 
-export default signup
+export default Signup
