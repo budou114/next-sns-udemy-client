@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 
 const Signup = () => {
-    const [name, setName] = useState<string>("");
+    const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -16,7 +16,7 @@ const Signup = () => {
         // 新規登録を行うAPIを叩く
         try {
             await apiClient.post("/auth/register", {
-                name,
+                username,
                 email,
                 password
             });
@@ -52,14 +52,14 @@ const Signup = () => {
                                 お名前
                             </label>
                             <input
-                                id="name"
-                                name="name"
+                                id="username"
+                                name="username"
                                 type="text"
                                 autoComplete="name"
                                 required
                                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-base focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                    setName(e.target.value)
+                                    setUsername(e.target.value)
                                 }
                             />
                         </div>
