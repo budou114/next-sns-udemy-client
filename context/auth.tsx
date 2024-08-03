@@ -3,7 +3,7 @@ import React, { ReactNode, useContext, useEffect, useState }  from "react";
 
 interface AuthContextType {
     user: null | {
-        id: number,
+        id: Number,
         username: string,
         email: string
     };
@@ -58,6 +58,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const logout = () => {
         localStorage.removeItem("auth_token");
+
+        delete apiClient.defaults.headers["Authorization"]
+        setUser(null);
     };
 
     const value = {
