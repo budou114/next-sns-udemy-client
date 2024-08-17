@@ -1,7 +1,7 @@
 export interface Profile {
     id: number;
     bio: string;
-    profileImageUrl: string;
+    profileImagePath: string;
     userId: number;
     user: UserType;
 }
